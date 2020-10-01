@@ -93,11 +93,9 @@ class PDFPage:
                 tree_type = tree.get('type')
 
             if tree_type is LITERAL_PAGES and 'Kids' in tree:
-                log.info('Pages: Kids=%r', tree['Kids'])
                 for c in list_value(tree['Kids']):
                     yield from search(c, tree)
             elif tree_type is LITERAL_PAGE:
-                log.info('Page: %r', tree)
                 yield (objid, tree)
         pages = False
         if 'Pages' in document.catalog:
